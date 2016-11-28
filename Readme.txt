@@ -1,6 +1,6 @@
-----------------------------
-CIS 540 Project, Spring 2015
-----------------------------
+--------------------------------------------------------
+2016.08.FALL.ENG.CS.6376.01 Hybrid/Embedded Sys Project
+--------------------------------------------------------
 
 In this project, you need to implement a controller to navigate aircraft while avoiding collision in MATLAB. We have provided here the skeleton code to run simulation for a given source and destinations of aircraft.
 
