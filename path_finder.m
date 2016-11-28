@@ -133,18 +133,13 @@ function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
                 end
             
                 % calculate position of other plane
-               flag=false;
+               
                for i=1:3
-                   for j=1:3
-						if(find_possible_path(ASorted(i,2),in,ASortedOpposite(j,2),in.m))
+                   	if(find_possible_path(ASorted(i,2),in,ASortedOpposite(i,2),in.m))
 							selected_value = ASorted(i,2);
-                            flag=true;
                             break;
-                        end
-                   end
-                   if(flag)
-                       break;
-                   end
+                    end
+                 
                end
               
        end
