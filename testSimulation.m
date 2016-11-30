@@ -34,8 +34,8 @@ for i=1:timeout
     end
 
     % Compute controller outputs
-    [out(1), s1] = controller(in(1), s1);
-    [out(2), s2] = controller(in(2), s2);
+    [out(1), s1] = controller(in(1), s1,1);
+    [out(2), s2] = controller(in(2), s2,2);
 
     % Simulate the motion of aircraft for next k steps.
     in = simulateStep(out, in, v, k, q);

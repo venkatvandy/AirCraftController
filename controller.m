@@ -24,7 +24,7 @@
 % out.val = out1(1,1);
 % state.mode = out1(1,1);
 
-out.val = path_finder(in.x,in.y,in.xd,in.yd,in.theta,in.m,in);
+out.val = path_finder(in.x,in.y,in.xd,in.yd,in.theta,in.m,in,aircraft_no);
 
 state.mode = out.val;
 

@@ -1,4 +1,4 @@
-function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
+function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in,aircraft_no)
 
     %distancePoints = [xdst,ydst;xcurr,ycurr];
     %currentDistance = pdist(distancePoints,'euclidean');
@@ -73,7 +73,7 @@ function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
             end
 			selected_value = ASorted(1,2); 
         
-            if( ~isempty(message))
+            if( ~isempty(message) && aircraft_no==2)
                 if( message.theta == 0 || message.theta == 360)
                     xf = 1;
                     yf = 0;
