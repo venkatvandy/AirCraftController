@@ -37,8 +37,9 @@ function done = find_possible_path( my_LRF,in,opp_LRF,message)
                 
                 position_plane2.theta = theta_plane2;
             
-			if((position_plane2.x== position_plane1.x) && (position_plane2.y== position_plane1.y) && (in.x == position_plane2.x) && (message.x == position_plane1.x))
+                % (in.x == message.x) || (in.y == message.y)
+			if((position_plane2.x== position_plane1.x) && (position_plane2.y== position_plane1.y))
 				done = false;
-			else
+            else
 				done = true;
             end

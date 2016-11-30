@@ -4,7 +4,8 @@ function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
     %currentDistance = pdist(distancePoints,'euclidean');
     ASorted = zeros(3,2);
     ASortedOpposite = zeros(3,2);
-	currentDistance = (xdst-xcurr) + (ydst-ycurr);
+    distancePoints = [xdst,ydst;xcurr,ycurr];
+    currentDistance = pdist(distancePoints,'euclidean');
     selected_value=0;
 	
     % Calculates the next coordinates based on the theta and current coordinates
@@ -42,17 +43,17 @@ function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
         end
 		
         %Calculating step distance from current position to the destination
-        currentDistanceF = abs(xdst-(xcurr+xf))+abs(ydst-(ycurr+yf));
-        currentDistanceL = abs(xdst-(xcurr+xl))+abs(ydst-(ycurr+yl));
-        currentDistanceR = abs(xdst-(xcurr+xr))+abs(ydst-(ycurr+yr));
-			
+         currentDistanceF = abs(xdst-(xcurr+xf))+abs(ydst-(ycurr+yf));
+         currentDistanceL = abs(xdst-(xcurr+xl))+abs(ydst-(ycurr+yl));
+         currentDistanceR = abs(xdst-(xcurr+xr))+abs(ydst-(ycurr+yr));
+            
 		ASorted(1,1) = currentDistanceL;
 		ASorted(2,1) = currentDistanceR;
 		ASorted(3,1) = currentDistanceF;
         
 		ASorted(1,2) = 1 ; 
 		ASorted(2,2) = -1 ; 
-		ASorted(3,2) = 0; 
+		ASorted(3,2) = 0;
     
         
 		%Sorting the distances to find the minimum possible distance and if step distances are equal then we check for euclidean distances
@@ -105,10 +106,10 @@ function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
             end
 		
         %Calculating step distance from current position to the destination
-        oppDistanceF = abs(message.xd-(message.x+xf))+abs(message.yd-(message.y+yf));
-        oppDistanceL = abs(message.xd-(message.x+xl))+abs(message.yd-(message.y+yl));
-        oppDistanceR = abs(message.xd-(message.x+xr))+abs(message.yd-(message.y+yr));
-        
+         oppDistanceF = abs(message.xd-(message.x+xf))+abs(message.yd-(message.y+yf));
+         oppDistanceL = abs(message.xd-(message.x+xl))+abs(message.yd-(message.y+yl));
+         oppDistanceR = abs(message.xd-(message.x+xr))+abs(message.yd-(message.y+yr));
+
         ASortedOpposite(1,1) = oppDistanceL;
 		ASortedOpposite(2,1) = oppDistanceR;
 		ASortedOpposite(3,1) = oppDistanceF;
@@ -117,7 +118,8 @@ function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
 		ASortedOpposite(1,2) = 1 ; 
 		ASortedOpposite(2,2) = -1 ; 
 		ASortedOpposite(3,2) = 0; 
-            
+
+        
                 for i=1:3
                     for j=(i+1):3
                         if ( ASortedOpposite(i,1) > ASortedOpposite(j,1))
@@ -133,13 +135,14 @@ function selected_value = path_finder( xcurr,ycurr,xdst,ydst,theta,message,in)
                 end
             
                 % calculate position of other plane
-               
+ 
                for i=1:3
+                   
                    	if(find_possible_path(ASorted(i,2),in,ASortedOpposite(i,2),in.m))
-							selected_value = ASorted(i,2);
-                            break;
+						selected_value = ASorted(i,2);
+                        break;
                     end
-                 
+                   
                end
               
        end
