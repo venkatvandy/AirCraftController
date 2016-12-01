@@ -11,7 +11,7 @@ function selected_value = path_finder( in,message,aircraft_no)
     % Calculates the next coordinates based on the theta and current coordinates
     if( ~(currentDistance == 0))
         
-        if( in.theta == 0 || in.theta == 360)
+        if( in.theta == 0 || theta == 360)
             xf = 1;
             yf = 0;
             xr = 0;
@@ -19,21 +19,21 @@ function selected_value = path_finder( in,message,aircraft_no)
             xl = 0;
             yl = 1;
             
-        elseif(in.theta == 90)
+        elseif(theta == 90)
             xf = 0;
             yf = 1;
             xr = 1;
             yr = 0;
             xl = -1;
             yl = 0;            
-        elseif(in.theta == 180)
+        elseif(theta == 180)
             xf = -1;
             yf = 0;
             xr = 0;
             yr = 1;
             xl = 0;
             yl = -1;
-        elseif(in.theta == 270)
+        elseif(theta == 270)
             xf = 0;
             yf = -1;
             xr = -1;
