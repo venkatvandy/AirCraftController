@@ -73,7 +73,7 @@ function selected_value = path_finder( in,message,aircraft_no)
             end
 			selected_value = ASorted(1,2); 
         
-            if( ~isempty(message) && aircraft_no==2)
+            if( ~isempty(message) && mod(aircraft_no,2)==0)
                 if( message.theta == 0 || message.theta == 360)
                     xf = 1;
                     yf = 0;
