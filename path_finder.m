@@ -1,52 +1,40 @@
 function selected_value = path_finder( in,message,aircraft_no)
 
-    %distancePoints = [in.xd,in.yd;in.x,in.y];
-    %currentDistance = pdist(distancePoints,'euclidean');
     ASorted = zeros(3,2);
     ASortedOpposite = zeros(3,2);
-    distancePoints = [in.xd,in.yd;in.x,in.y];
-    currentDistance = pdist(distancePoints,'euclidean');
+    points = [in.xd,in.yd;in.x,in.y];
+    distance = pdist(points,'euclidean');
     selected_value=0;
 	
     % Calculates the next coordinates based on the theta and current coordinates
-    if( ~(currentDistance == 0))
+    if( ~(distance == 0))
         
         if( in.theta == 0 || in.theta == 360)
-            xf = 1;
-            yf = 0;
-            xr = 0;
-            yr = -1;
-            xl = 0;
-            yl = 1;
-            
+         
+			 currentDistanceF = abs(in.xd-(in.x+1))+abs(in.yd-in.y);
+			 currentDistanceR = abs(in.xd-in.x)+abs(in.yd-(in.y-1));
+			 currentDistanceL = abs(in.xd-in.x)+abs(in.yd-(in.y+1));
+				 
         elseif(in.theta == 90)
-            xf = 0;
-            yf = 1;
-            xr = 1;
-            yr = 0;
-            xl = -1;
-            yl = 0;            
+       	
+			currentDistanceF = abs(in.xd-in.x)+abs(in.yd-(in.y+1));
+			currentDistanceR = abs(in.xd-(in.x+1))+abs(in.yd-in.y);
+			currentDistanceL = abs(in.xd-(in.x-1))+abs(in.yd-in.y);
+		 
         elseif(in.theta == 180)
-            xf = -1;
-            yf = 0;
-            xr = 0;
-            yr = 1;
-            xl = 0;
-            yl = -1;
-        elseif(in.theta == 270)
-            xf = 0;
-            yf = -1;
-            xr = -1;
-            yr = 0;
-            xl = 1;
-            yl = 0;
+       	
+			currentDistanceF = abs(in.xd-(in.x-1))+abs(in.yd-in.y);
+			currentDistanceR = abs(in.xd-in.x)+abs(in.yd-(in.y+1));
+			currentDistanceL = abs(in.xd-in.x)+abs(in.yd-(in.y-1));
+        
+		elseif(in.theta == 270)
+       
+			currentDistanceF = abs(in.xd-in.x)+abs(in.yd-(in.y-1));
+			currentDistanceR = abs(in.xd-(in.x-1))+abs(in.yd-in.y);
+			currentDistanceL = abs(in.xd-(in.x+1))+abs(in.yd-in.y);
+		 
         end
-		
-        %Calculating step distance from current position to the destination
-         currentDistanceF = abs(in.xd-(in.x+xf))+abs(in.yd-(in.y+yf));
-         currentDistanceL = abs(in.xd-(in.x+xl))+abs(in.yd-(in.y+yl));
-         currentDistanceR = abs(in.xd-(in.x+xr))+abs(in.yd-(in.y+yr));
-            
+		    
 		ASorted(1,1) = currentDistanceL;
 		ASorted(2,1) = currentDistanceR;
 		ASorted(3,1) = currentDistanceF;
@@ -75,41 +63,31 @@ function selected_value = path_finder( in,message,aircraft_no)
         
             if( ~isempty(message) && mod(aircraft_no,2)==0)
                 if( message.theta == 0 || message.theta == 360)
-                    xf = 1;
-                    yf = 0;
-                    xr = 0;
-                    yr = -1;
-                    xl = 0;
-                    yl = 1;
+        			
+					oppDistanceF = abs(message.xd-(message.x+1))+abs(message.yd - message.y);
+					oppDistanceR = abs(message.xd - message.x)+abs(message.yd-(message.y-1));
+					oppDistanceL = abs(message.xd - message.x)+abs(message.yd-(message.y+1));
+
             
                 elseif(message.theta == 90)
-                    xf = 0;
-                    yf = 1;
-                    xr = 1;
-                    yr = 0;
-                    xl = -1;
-                    yl = 0;            
+        			oppDistanceF = abs(message.xd - message.x)+abs(message.yd-(message.y+1));
+					oppDistanceR = abs(message.xd-(message.x+1))+abs(message.yd-message.y);
+					oppDistanceL = abs(message.xd-(message.x-1))+abs(message.yd-message.y);
+
                 elseif(message.theta == 180)
-                    xf = -1;
-                    yf = 0;
-                    xr = 0;
-                    yr = 1;
-                    xl = 0;
-                    yl = -1;
+        			
+					oppDistanceF = abs(message.xd-(message.x-1))+abs(message.yd - message.y);
+					oppDistanceR = abs(message.xd - message.x)+abs(message.yd-(message.y+1));
+					oppDistanceL = abs(message.xd - message.x)+abs(message.yd-(message.y-1));
+
                 elseif(message.theta == 270)
-                    xf = 0;
-                    yf = -1;
-                    xr = -1;
-                    yr = 0;
-                    xl = 1;
-                    yl = 0;
+        			
+					oppDistanceF = abs(message.xd - message.x)+abs(message.yd-(message.y-1));
+					oppDistanceR = abs(message.xd-(message.x-1))+abs(message.yd - message.y);
+					oppDistanceL = abs(message.xd-(message.x+1))+abs(message.yd - message.y);
+
             end
 		
-        %Calculating step distance from current position to the destination
-         oppDistanceF = abs(message.xd-(message.x+xf))+abs(message.yd-(message.y+yf));
-         oppDistanceL = abs(message.xd-(message.x+xl))+abs(message.yd-(message.y+yl));
-         oppDistanceR = abs(message.xd-(message.x+xr))+abs(message.yd-(message.y+yr));
-
         ASortedOpposite(1,1) = oppDistanceL;
 		ASortedOpposite(2,1) = oppDistanceR;
 		ASortedOpposite(3,1) = oppDistanceF;
