@@ -22,7 +22,7 @@ pos2 = [];
 s1 = [];
 s2 = [];
 for i=1:timeout
-    % Compute controller outputs
+    % Compute contr oller outputs
     [out(1), s1] = controller(in(1), s1);
     [out(2), s2] = controller(in(2), s2);
     % Store controller outputs and aircraft state 
