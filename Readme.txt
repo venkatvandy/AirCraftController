@@ -44,4 +44,5 @@ Evaluation:
 -----------
 Make sure that all test cases pass the following command:
 [numPassed, numFailed, log] = testbench(3, 100)
-
+[numPassed, numFailed, log] = testbench(3, 25)
+[numPassed, numFailed, log] = testbench(4, 40)
